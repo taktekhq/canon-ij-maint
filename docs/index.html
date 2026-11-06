@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>canon-ij-maint: Deep clean Canon PIXMA printers from Linux</title>
 <meta name="description" content="Free, open-source command-line tool to run deep cleaning, print head cleaning and nozzle checks on Canon PIXMA and MegaTank printers (tested on the G3010) from Linux, without Canon's driver.">
-<link rel="canonical" href="https://nizarmah.github.io/canon-ij-maint/">
+<link rel="canonical" href="https://nizarmah.com/canon-ij-maint/">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Nizar">
 <meta name="theme-color" content="#c2185b">
@@ -14,8 +14,13 @@
 <meta property="og:site_name" content="canon-ij-maint">
 <meta property="og:title" content="Deep clean your Canon PIXMA printer from Linux">
 <meta property="og:description" content="One missing color? Run a deep cleaning on Canon PIXMA / MegaTank printers from Linux with one command. No Canon driver needed.">
-<meta property="og:url" content="https://nizarmah.github.io/canon-ij-maint/">
-<meta name="twitter:card" content="summary">
+<meta property="og:url" content="https://nizarmah.com/canon-ij-maint/">
+<meta property="og:image" content="https://nizarmah.com/canon-ij-maint/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Before and after scans of a Canon G3010 color test page: magenta missing before, restored after one deep clean.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nizarmah.com/canon-ij-maint/img/og.jpg">
 <meta name="twitter:title" content="Deep clean your Canon PIXMA printer from Linux">
 <meta name="twitter:description" content="One command to deep clean, clean or nozzle-check a Canon PIXMA / MegaTank printer from Linux. Free and open source.">
 
@@ -28,7 +33,7 @@
   "@graph": [
     {
       "@type": "SoftwareApplication",
-      "@id": "https://nizarmah.github.io/canon-ij-maint/#app",
+      "@id": "https://nizarmah.com/canon-ij-maint/#app",
       "name": "canon-ij-maint",
       "description": "Command-line tool that runs deep cleaning, regular print head cleaning and nozzle checks on Canon PIXMA and MegaTank inkjet printers from Linux, without installing Canon's driver.",
       "applicationCategory": "UtilitiesApplication",
@@ -37,7 +42,7 @@
       "license": "https://opensource.org/licenses/MIT",
       "isAccessibleForFree": true,
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "url": "https://nizarmah.github.io/canon-ij-maint/",
+      "url": "https://nizarmah.com/canon-ij-maint/",
       "downloadUrl": "https://github.com/nizarmah/canon-ij-maint",
       "codeRepository": "https://github.com/nizarmah/canon-ij-maint",
       "programmingLanguage": "Python",
@@ -187,10 +192,10 @@ h3 { font-size: 18px; margin: 22px 0 6px; }
 
 .story { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 @media (max-width: 620px) { .story { grid-template-columns: 1fr; } }
-.swatches { display: flex; gap: 8px; margin: 10px 0 6px; }
-.sw { flex: 1; height: 44px; border-radius: 8px; border: 1px solid var(--line); }
-.sw-label { display: flex; gap: 8px; font-size: 12px; color: var(--muted); }
-.sw-label span { flex: 1; text-align: center; }
+.scan { margin: 0; }
+.scan img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--line); margin: 6px 0 10px; }
+.scan figcaption { color: var(--muted); font-size: 15px; }
+.note { color: var(--muted); font-size: 14px; margin-top: 12px; }
 
 table { width: 100%; border-collapse: collapse; font-size: 15.5px; }
 th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
@@ -248,25 +253,20 @@ canon-ij-maint --queue Canon_G3010 nozzle-check</code></pre>
         how it builds its commands. It's a small XML message with the cleaning type hard-coded to <code>regular</code>.
         Setting it to <code>deep</code> worked: one deep cleaning and a 10-minute rest brought magenta back.</p>
       <div class="story">
-        <div class="card">
+        <figure class="card scan">
           <h3>Before</h3>
-          <div class="swatches">
-            <div class="sw" style="background:#49a6c6"></div><div class="sw" style="background:#dad9b6"></div>
-            <div class="sw" style="background:#e4c05d"></div><div class="sw" style="background:#d1c36f"></div>
-          </div>
-          <div class="sw-label"><span>cyan</span><span>magenta</span><span>yellow</span><span>red</span></div>
-          <p>Measured from a scan: "magenta" printed as almost bare paper, so red came out yellow.</p>
-        </div>
-        <div class="card">
+          <a href="img/before.jpg"><img src="img/before.jpg" width="900" height="1237" loading="lazy"
+            alt="Scanned Canon G3010 color test page before deep cleaning: the magenta block, gradient, lines and band print as pale yellowish paper, red prints yellow and blue prints teal."></a>
+          <figcaption>Magenta prints as almost bare paper, so red comes out yellow and blue comes out teal.</figcaption>
+        </figure>
+        <figure class="card scan">
           <h3>After one deep clean</h3>
-          <div class="swatches">
-            <div class="sw" style="background:#4a88af"></div><div class="sw" style="background:#cb4d63"></div>
-            <div class="sw" style="background:#e4c05d"></div><div class="sw" style="background:#c95852"></div>
-          </div>
-          <div class="sw-label"><span>cyan</span><span>magenta</span><span>yellow</span><span>red</span></div>
-          <p>Same test page, same scanner: magenta and red are back.</p>
-        </div>
+          <a href="img/after.jpg"><img src="img/after.jpg" width="900" height="1237" loading="lazy"
+            alt="Scanned Canon G3010 color test page after one deep cleaning: magenta, red and blue print correctly and the grey band is neutral."></a>
+          <figcaption>Same test page, same scanner. Magenta, red and blue are back, and the greys are neutral.</figcaption>
+        </figure>
       </div>
+      <p class="note">Unedited flatbed scans (150 dpi) from the G3010's own scanner. Tap a scan to see it full size.</p>
     </section>
 
     <section id="install">

@@ -8,7 +8,7 @@ Deep cleaning is normally only available from Canon's Windows/macOS tools or the
 buttons, and many owners never find the right button sequence. This tool sends the same commands
 Canon's driver sends, plus the deep cleaning variant.
 
-Website: <https://nizarmah.github.io/canon-ij-maint/>
+Website: <https://nizarmah.com/canon-ij-maint/>
 
 ## Install
 
@@ -61,6 +61,12 @@ All three commands are byte-for-byte identical to what Canon's own `cmdtocanonij
 
 On our G3010, magenta had stopped printing entirely, with plenty of ink in the tank. Two regular
 cleanings did nothing. One deep cleaning, followed by a 10-minute rest, brought it back fully.
+
+| Before | After one deep clean |
+|---|---|
+| ![Color test page before: magenta missing](docs/img/before.jpg) | ![Color test page after: magenta restored](docs/img/after.jpg) |
+
+Unedited 150 dpi scans of the same test page, from the G3010's own scanner.
 
 On the G3010, `--group color` deep cleaning is **ignored** (no sound, nothing happens). Use the
 default `--group all`. `--group black` has not been tested.

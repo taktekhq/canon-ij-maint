@@ -28,6 +28,6 @@ Canon's official Linux driver (cnijfilter2) only offers regular cleaning and a n
 
 ## Links
 
-- Website: https://nizarmah.github.io/canon-ij-maint/
+- Website: https://nizarmah.com/canon-ij-maint/
 - Source: https://github.com/nizarmah/canon-ij-maint
 - Issues / model reports: https://github.com/nizarmah/canon-ij-maint/issues

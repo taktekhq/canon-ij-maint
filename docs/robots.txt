@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nizarmah.github.io/canon-ij-maint/sitemap.xml
+Sitemap: https://nizarmah.com/canon-ij-maint/sitemap.xml

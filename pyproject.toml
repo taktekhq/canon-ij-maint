@@ -20,7 +20,7 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://nizarmah.github.io/canon-ij-maint/"
+Homepage = "https://nizarmah.com/canon-ij-maint/"
 Source = "https://github.com/nizarmah/canon-ij-maint"
 Issues = "https://github.com/nizarmah/canon-ij-maint/issues"
 
