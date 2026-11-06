@@ -5,22 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>canon-ij-maint: Deep clean Canon PIXMA printers from Linux</title>
 <meta name="description" content="Free, open-source command-line tool to run deep cleaning, print head cleaning and nozzle checks on Canon PIXMA and MegaTank printers (tested on the G3010) from Linux, without Canon's driver.">
-<link rel="canonical" href="https://nizarmah.com/canon-ij-maint/">
+<link rel="canonical" href="https://taktek.io/canon-ij-maint/">
 <meta name="robots" content="index, follow">
-<meta name="author" content="Nizar">
+<meta name="author" content="Taktek">
 <meta name="theme-color" content="#c2185b">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="canon-ij-maint">
 <meta property="og:title" content="Deep clean your Canon PIXMA printer from Linux">
 <meta property="og:description" content="One missing color? Run a deep cleaning on Canon PIXMA / MegaTank printers from Linux with one command. No Canon driver needed.">
-<meta property="og:url" content="https://nizarmah.com/canon-ij-maint/">
-<meta property="og:image" content="https://nizarmah.com/canon-ij-maint/img/og.jpg">
+<meta property="og:url" content="https://taktek.io/canon-ij-maint/">
+<meta property="og:image" content="https://taktek.io/canon-ij-maint/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Before and after scans of a Canon G3010 color test page: magenta missing before, restored after one deep clean.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nizarmah.com/canon-ij-maint/img/og.jpg">
+<meta name="twitter:image" content="https://taktek.io/canon-ij-maint/img/og.jpg">
 <meta name="twitter:title" content="Deep clean your Canon PIXMA printer from Linux">
 <meta name="twitter:description" content="One command to deep clean, clean or nozzle-check a Canon PIXMA / MegaTank printer from Linux. Free and open source.">
 
@@ -33,7 +33,7 @@
   "@graph": [
     {
       "@type": "SoftwareApplication",
-      "@id": "https://nizarmah.com/canon-ij-maint/#app",
+      "@id": "https://taktek.io/canon-ij-maint/#app",
       "name": "canon-ij-maint",
       "description": "Command-line tool that runs deep cleaning, regular print head cleaning and nozzle checks on Canon PIXMA and MegaTank inkjet printers from Linux, without installing Canon's driver.",
       "applicationCategory": "UtilitiesApplication",
@@ -42,11 +42,11 @@
       "license": "https://opensource.org/licenses/MIT",
       "isAccessibleForFree": true,
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "url": "https://nizarmah.com/canon-ij-maint/",
-      "downloadUrl": "https://github.com/nizarmah/canon-ij-maint",
-      "codeRepository": "https://github.com/nizarmah/canon-ij-maint",
+      "url": "https://taktek.io/canon-ij-maint/",
+      "downloadUrl": "https://github.com/taktekhq/canon-ij-maint",
+      "codeRepository": "https://github.com/taktekhq/canon-ij-maint",
       "programmingLanguage": "Go",
-      "author": { "@type": "Person", "name": "Nizar", "url": "https://github.com/nizarmah" },
+      "author": { "@type": "Organization", "name": "Taktek", "url": "https://taktek.io/" },
       "featureList": [
         "Deep cleaning of the print heads",
         "Regular print head cleaning",
@@ -62,7 +62,7 @@
       "totalTime": "PT15M",
       "tool": [{ "@type": "HowToTool", "name": "Linux computer with CUPS" }],
       "step": [
-        { "@type": "HowToStep", "name": "Install", "text": "Download the canon-ij-maint binary from the GitHub releases page, or run: go install github.com/nizarmah/canon-ij-maint/cmd/canon-ij-maint@latest" },
+        { "@type": "HowToStep", "name": "Install", "text": "Download the canon-ij-maint binary from the GitHub releases page, or run: go install github.com/taktekhq/canon-ij-maint/cmd/canon-ij-maint@latest" },
         { "@type": "HowToStep", "name": "Find the printer", "text": "Run: canon-ij-maint list. It shows Canon CUPS queues and USB printer devices." },
         { "@type": "HowToStep", "name": "Start the deep cleaning", "text": "Run: canon-ij-maint --queue YOUR_QUEUE clean --deep. The printer whirs for 2 to 3 minutes." },
         { "@type": "HowToStep", "name": "Let the ink settle", "text": "Leave the printer alone for about 10 minutes after it goes quiet." },
@@ -215,7 +215,7 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 44px; color: var(--m
 <div class="wrap">
   <header class="top">
     <a class="brand" href="./"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>canon-ij-maint</a>
-    <nav><a href="#install">Install</a><a href="#faq">FAQ</a><a href="https://github.com/nizarmah/canon-ij-maint">GitHub</a></nav>
+    <nav><a href="#install">Install</a><a href="#faq">FAQ</a><a href="https://github.com/taktekhq/canon-ij-maint">GitHub</a></nav>
   </header>
 
   <main>
@@ -226,7 +226,7 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 44px; color: var(--m
         <strong>canon-ij-maint</strong> can, with one command and no Canon driver.</p>
       <div class="cta">
         <a class="btn primary" href="#install">Install in 10 seconds</a>
-        <a class="btn ghost" href="https://github.com/nizarmah/canon-ij-maint">View on GitHub</a>
+        <a class="btn ghost" href="https://github.com/taktekhq/canon-ij-maint">View on GitHub</a>
       </div>
     </div>
 
@@ -272,11 +272,11 @@ canon-ij-maint --queue Canon_G3010 nozzle-check</code></pre>
     <section id="install">
       <h2>Install</h2>
       <p>Download the single binary. It has no dependencies (use <code>arm64</code> instead of <code>amd64</code> on a Raspberry Pi 4 or 5):</p>
-      <pre><code>curl -fsSL -o canon-ij-maint https://github.com/nizarmah/canon-ij-maint/releases/latest/download/canon-ij-maint-linux-amd64
+      <pre><code>curl -fsSL -o canon-ij-maint https://github.com/taktekhq/canon-ij-maint/releases/latest/download/canon-ij-maint-linux-amd64
 chmod +x canon-ij-maint &amp;&amp; sudo mv canon-ij-maint /usr/local/bin/
 canon-ij-maint list</code></pre>
       <p>Or build it with Go 1.22+:</p>
-      <pre><code>go install github.com/nizarmah/canon-ij-maint/cmd/canon-ij-maint@latest</code></pre>
+      <pre><code>go install github.com/taktekhq/canon-ij-maint/cmd/canon-ij-maint@latest</code></pre>
     </section>
 
     <section id="howto">
@@ -304,7 +304,7 @@ canon-ij-maint list</code></pre>
         </tbody>
       </table>
       <p>If your printer ignores a command, nothing happens and nothing breaks.
-        <a href="https://github.com/nizarmah/canon-ij-maint/issues">Tell us which model worked</a> so we can add it.</p>
+        <a href="https://github.com/taktekhq/canon-ij-maint/issues">Tell us which model worked</a> so we can add it.</p>
     </section>
 
     <section id="faq">
@@ -348,7 +348,7 @@ canon-ij-maint list</code></pre>
   <footer>
     <p>Want the whole family to print, scan and run these cleanings from their phones? See
       <a href="https://taktek.io/canon-home-printer/">canon-home-printer</a>, a small website for the printer at home that uses canon-ij-maint.</p>
-    <p>canon-ij-maint is MIT-licensed. Made by <a href="https://github.com/nizarmah">Nizar</a>.
+    <p>canon-ij-maint is MIT-licensed. By <a href="https://taktek.io/">Taktek</a> and Nizar Mahmoud.
       Not affiliated with or endorsed by Canon Inc. "Canon", "PIXMA" and "MegaTank" are trademarks of Canon Inc.</p>
   </footer>
 </div>

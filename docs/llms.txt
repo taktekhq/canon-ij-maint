@@ -6,9 +6,9 @@ Canon's official Linux driver (cnijfilter2) only offers regular cleaning and a n
 
 ## Install
 
-- Binary (no dependencies): https://github.com/nizarmah/canon-ij-maint/releases/latest/download/canon-ij-maint-linux-amd64 (also linux-arm64, linux-386, linux-armv7)
-- Or with Go 1.22+: `go install github.com/nizarmah/canon-ij-maint/cmd/canon-ij-maint@latest`
-- Go package for other programs: `github.com/nizarmah/canon-ij-maint` (Cleaning, NozzleCheck, SendToQueue)
+- Binary (no dependencies): https://github.com/taktekhq/canon-ij-maint/releases/latest/download/canon-ij-maint-linux-amd64 (also linux-arm64, linux-386, linux-armv7)
+- Or with Go 1.22+: `go install github.com/taktekhq/canon-ij-maint/cmd/canon-ij-maint@latest`
+- Go package for other programs: `github.com/taktekhq/canon-ij-maint` (Cleaning, NozzleCheck, SendToQueue)
 
 ## Commands
 
@@ -29,6 +29,6 @@ Canon's official Linux driver (cnijfilter2) only offers regular cleaning and a n
 
 ## Links
 
-- Website: https://nizarmah.com/canon-ij-maint/
-- Source: https://github.com/nizarmah/canon-ij-maint
-- Issues / model reports: https://github.com/nizarmah/canon-ij-maint/issues
+- Website: https://taktek.io/canon-ij-maint/
+- Source: https://github.com/taktekhq/canon-ij-maint
+- Issues / model reports: https://github.com/taktekhq/canon-ij-maint/issues

@@ -1,3 +1,3 @@
-module github.com/nizarmah/canon-ij-maint
+module github.com/taktekhq/canon-ij-maint
 
 go 1.22

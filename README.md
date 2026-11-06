@@ -8,7 +8,7 @@ Deep cleaning is normally only available from Canon's Windows/macOS tools or the
 buttons, and many owners never find the right button sequence. This tool sends the same commands
 Canon's driver sends, plus the deep cleaning variant.
 
-Website: <https://nizarmah.com/canon-ij-maint/>
+Website: <https://taktek.io/canon-ij-maint/>
 
 ## Install
 
@@ -16,14 +16,14 @@ Download the binary for your machine (no dependencies; `amd64` for most PCs, `ar
 Raspberry Pi 4/5):
 
 ```bash
-curl -fsSL -o canon-ij-maint https://github.com/nizarmah/canon-ij-maint/releases/latest/download/canon-ij-maint-linux-amd64
+curl -fsSL -o canon-ij-maint https://github.com/taktekhq/canon-ij-maint/releases/latest/download/canon-ij-maint-linux-amd64
 chmod +x canon-ij-maint && sudo mv canon-ij-maint /usr/local/bin/
 ```
 
 Or build it with Go 1.22+:
 
 ```bash
-go install github.com/nizarmah/canon-ij-maint/cmd/canon-ij-maint@latest
+go install github.com/taktekhq/canon-ij-maint/cmd/canon-ij-maint@latest
 ```
 
 ## Quick start
@@ -81,7 +81,7 @@ simply stays silent; nothing harmful happens. Reports for other models are welco
 The command builder is a small Go package, so other programs can send the same commands:
 
 ```go
-import canonij "github.com/nizarmah/canon-ij-maint"
+import canonij "github.com/taktekhq/canon-ij-maint"
 
 data, _ := canonij.Cleaning(canonij.Deep, canonij.All)
 out, err := canonij.SendToQueue("Canon_G3010", "Deep cleaning", "", data)

@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	canonij "github.com/nizarmah/canon-ij-maint"
+	canonij "github.com/taktekhq/canon-ij-maint"
 )
 
 const usage = `canon-ij-maint: clean Canon PIXMA print heads and print nozzle checks from Linux.
