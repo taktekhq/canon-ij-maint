@@ -6,8 +6,9 @@ Canon's official Linux driver (cnijfilter2) only offers regular cleaning and a n
 
 ## Install
 
-- `pipx install git+https://github.com/nizarmah/canon-ij-maint`
-- Or download the single file: https://raw.githubusercontent.com/nizarmah/canon-ij-maint/main/canon_ij_maint.py (Python 3.8+, no dependencies)
+- Binary (no dependencies): https://github.com/nizarmah/canon-ij-maint/releases/latest/download/canon-ij-maint-linux-amd64 (also linux-arm64, linux-386, linux-armv7)
+- Or with Go 1.22+: `go install github.com/nizarmah/canon-ij-maint/cmd/canon-ij-maint@latest`
+- Go package for other programs: `github.com/nizarmah/canon-ij-maint` (Cleaning, NozzleCheck, SendToQueue)
 
 ## Commands
 

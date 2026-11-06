@@ -12,33 +12,34 @@ Website: <https://nizarmah.com/canon-ij-maint/>
 
 ## Install
 
+Download the binary for your machine (no dependencies; `amd64` for most PCs, `arm64` for a
+Raspberry Pi 4/5):
+
 ```bash
-pipx install git+https://github.com/nizarmah/canon-ij-maint
+curl -fsSL -o canon-ij-maint https://github.com/nizarmah/canon-ij-maint/releases/latest/download/canon-ij-maint-linux-amd64
+chmod +x canon-ij-maint && sudo mv canon-ij-maint /usr/local/bin/
 ```
 
-Or just download the single file. It has no dependencies:
+Or build it with Go 1.22+:
 
 ```bash
-curl -fsSLO https://raw.githubusercontent.com/nizarmah/canon-ij-maint/main/canon_ij_maint.py
-python3 canon_ij_maint.py list
+go install github.com/nizarmah/canon-ij-maint/cmd/canon-ij-maint@latest
 ```
 
 ## Quick start
 
-The examples use `python3 canon_ij_maint.py`. With pipx, just run `canon-ij-maint`.
-
 ```bash
 # list Canon printers this machine knows about
-python3 canon_ij_maint.py list
+canon-ij-maint list
 
 # regular cleaning
-python3 canon_ij_maint.py --queue YOUR_QUEUE clean
+canon-ij-maint --queue YOUR_QUEUE clean
 
 # deep cleaning (uses a lot more ink; let the printer rest ~10 minutes afterwards)
-python3 canon_ij_maint.py --queue YOUR_QUEUE clean --deep
+canon-ij-maint --queue YOUR_QUEUE clean --deep
 
 # print the nozzle check pattern
-python3 canon_ij_maint.py --queue YOUR_QUEUE nozzle-check
+canon-ij-maint --queue YOUR_QUEUE nozzle-check
 ```
 
 The destination can be:
@@ -75,6 +76,20 @@ Other recent PIXMA, MegaTank (G-series), TS and TR models that use Canon's `cnij
 probably speak the same protocol, but they're untested. If a command is ignored, the printer
 simply stays silent; nothing harmful happens. Reports for other models are welcome.
 
+## Use it from Go
+
+The command builder is a small Go package, so other programs can send the same commands:
+
+```go
+import canonij "github.com/nizarmah/canon-ij-maint"
+
+data, _ := canonij.Cleaning(canonij.Deep, canonij.All)
+out, err := canonij.SendToQueue("Canon_G3010", "Deep cleaning", "", data)
+```
+
+[canon-home-printer](https://github.com/taktekhq/canon-home-printer), a family website for a
+home G3010, uses it for its maintenance buttons.
+
 ## How it works
 
 These printers accept "IVEC" XML commands on the print channel. Canon's `cmdtocanonij3` CUPS
@@ -105,6 +120,15 @@ ignored by the G3010.
 
 - Ink flush / "system cleaning". Its command value is unknown.
 - Reading ink levels or status back from the printer. That needs a two-way connection.
+
+## Develop
+
+```bash
+go test ./...
+```
+
+`testdata/` holds the exact bytes that were sent to the G3010 and fixed it; the tests check
+the output against them byte for byte.
 
 ## License and disclaimer
 

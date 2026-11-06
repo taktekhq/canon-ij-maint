@@ -45,14 +45,14 @@
       "url": "https://nizarmah.com/canon-ij-maint/",
       "downloadUrl": "https://github.com/nizarmah/canon-ij-maint",
       "codeRepository": "https://github.com/nizarmah/canon-ij-maint",
-      "programmingLanguage": "Python",
+      "programmingLanguage": "Go",
       "author": { "@type": "Person", "name": "Nizar", "url": "https://github.com/nizarmah" },
       "featureList": [
         "Deep cleaning of the print heads",
         "Regular print head cleaning",
         "Nozzle check pattern",
         "Works through any CUPS queue or directly on /dev/usb/lp*",
-        "No dependencies beyond Python 3.8"
+        "A single binary with no dependencies"
       ]
     },
     {
@@ -60,9 +60,9 @@
       "name": "How to deep clean a Canon PIXMA printer from Linux",
       "description": "Run a deep cleaning on a Canon PIXMA or MegaTank printer (such as the G3010) from Linux using canon-ij-maint.",
       "totalTime": "PT15M",
-      "tool": [{ "@type": "HowToTool", "name": "Linux computer with CUPS and Python 3" }],
+      "tool": [{ "@type": "HowToTool", "name": "Linux computer with CUPS" }],
       "step": [
-        { "@type": "HowToStep", "name": "Install", "text": "Run: pipx install git+https://github.com/nizarmah/canon-ij-maint" },
+        { "@type": "HowToStep", "name": "Install", "text": "Download the canon-ij-maint binary from the GitHub releases page, or run: go install github.com/nizarmah/canon-ij-maint/cmd/canon-ij-maint@latest" },
         { "@type": "HowToStep", "name": "Find the printer", "text": "Run: canon-ij-maint list. It shows Canon CUPS queues and USB printer devices." },
         { "@type": "HowToStep", "name": "Start the deep cleaning", "text": "Run: canon-ij-maint --queue YOUR_QUEUE clean --deep. The printer whirs for 2 to 3 minutes." },
         { "@type": "HowToStep", "name": "Let the ink settle", "text": "Leave the printer alone for about 10 minutes after it goes quiet." },
@@ -90,7 +90,7 @@
         {
           "@type": "Question",
           "name": "Do I need to install Canon's driver to use canon-ij-maint?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. It needs only Python 3.8 or newer. It can send commands through any CUPS queue for the printer (including a Gutenprint one) or write directly to the USB printer device." }
+          "acceptedAnswer": { "@type": "Answer", "text": "No. It is a single binary with no dependencies. It can send commands through any CUPS queue for the printer (including a Gutenprint one) or write directly to the USB printer device." }
         },
         {
           "@type": "Question",
@@ -242,7 +242,7 @@ canon-ij-maint --queue Canon_G3010 nozzle-check</code></pre>
         <div class="card"><h3>Deep cleaning</h3><p>The stronger cleaning cycle that Canon's Linux driver doesn't offer. Clears stubborn clogs.</p></div>
         <div class="card"><h3>Regular cleaning</h3><p>The everyday print head cleaning, for faint lines or light streaks.</p></div>
         <div class="card"><h3>Nozzle check</h3><p>Prints Canon's test pattern so you can see which color has gaps.</p></div>
-        <div class="card"><h3>No driver needed</h3><p>One Python file, no dependencies. Works through any CUPS queue or straight to <code>/dev/usb/lp0</code>.</p></div>
+        <div class="card"><h3>No driver needed</h3><p>One small binary, no dependencies. Works through any CUPS queue or straight to <code>/dev/usb/lp0</code>.</p></div>
       </div>
     </section>
 
@@ -271,11 +271,12 @@ canon-ij-maint --queue Canon_G3010 nozzle-check</code></pre>
 
     <section id="install">
       <h2>Install</h2>
-      <p>With <a href="https://pipx.pypa.io/">pipx</a>:</p>
-      <pre><code>pipx install git+https://github.com/nizarmah/canon-ij-maint</code></pre>
-      <p>Or grab the single file. It only needs Python 3.8+:</p>
-      <pre><code>curl -fsSLO https://raw.githubusercontent.com/nizarmah/canon-ij-maint/main/canon_ij_maint.py
-python3 canon_ij_maint.py list</code></pre>
+      <p>Download the single binary. It has no dependencies (use <code>arm64</code> instead of <code>amd64</code> on a Raspberry Pi 4 or 5):</p>
+      <pre><code>curl -fsSL -o canon-ij-maint https://github.com/nizarmah/canon-ij-maint/releases/latest/download/canon-ij-maint-linux-amd64
+chmod +x canon-ij-maint &amp;&amp; sudo mv canon-ij-maint /usr/local/bin/
+canon-ij-maint list</code></pre>
+      <p>Or build it with Go 1.22+:</p>
+      <pre><code>go install github.com/nizarmah/canon-ij-maint/cmd/canon-ij-maint@latest</code></pre>
     </section>
 
     <section id="howto">
@@ -325,7 +326,7 @@ python3 canon_ij_maint.py list</code></pre>
       </details>
       <details>
         <summary>Do I need Canon's driver installed?</summary>
-        <p>No. It needs only Python 3.8+. It sends commands through any CUPS queue for the printer, including a Gutenprint one,
+        <p>No. It is a single binary with no dependencies. It sends commands through any CUPS queue for the printer, including a Gutenprint one,
           or writes straight to the USB printer device.</p>
       </details>
       <details>
