@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nizarmah.github.io/canon-ij-maint/sitemap.xml

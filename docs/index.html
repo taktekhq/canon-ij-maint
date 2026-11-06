@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>canon-ij-maint: Deep clean Canon PIXMA printers from Linux</title>
+<meta name="description" content="Free, open-source command-line tool to run deep cleaning, print head cleaning and nozzle checks on Canon PIXMA and MegaTank printers (tested on the G3010) from Linux, without Canon's driver.">
+<link rel="canonical" href="https://nizarmah.github.io/canon-ij-maint/">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Nizar">
+<meta name="theme-color" content="#c2185b">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="canon-ij-maint">
+<meta property="og:title" content="Deep clean your Canon PIXMA printer from Linux">
+<meta property="og:description" content="One missing color? Run a deep cleaning on Canon PIXMA / MegaTank printers from Linux with one command. No Canon driver needed.">
+<meta property="og:url" content="https://nizarmah.github.io/canon-ij-maint/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Deep clean your Canon PIXMA printer from Linux">
+<meta name="twitter:description" content="One command to deep clean, clean or nozzle-check a Canon PIXMA / MegaTank printer from Linux. Free and open source.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='10' cy='12' r='7' fill='%2300a0d6'/%3E%3Ccircle cx='22' cy='12' r='7' fill='%23d6006f' fill-opacity='.85'/%3E%3Ccircle cx='16' cy='21' r='7' fill='%23f5c400' fill-opacity='.85'/%3E%3C/svg%3E">
+<link rel="alternate" type="text/plain" title="LLM summary" href="llms.txt">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://nizarmah.github.io/canon-ij-maint/#app",
+      "name": "canon-ij-maint",
+      "description": "Command-line tool that runs deep cleaning, regular print head cleaning and nozzle checks on Canon PIXMA and MegaTank inkjet printers from Linux, without installing Canon's driver.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Linux",
+      "softwareVersion": "0.1.0",
+      "license": "https://opensource.org/licenses/MIT",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "url": "https://nizarmah.github.io/canon-ij-maint/",
+      "downloadUrl": "https://github.com/nizarmah/canon-ij-maint",
+      "codeRepository": "https://github.com/nizarmah/canon-ij-maint",
+      "programmingLanguage": "Python",
+      "author": { "@type": "Person", "name": "Nizar", "url": "https://github.com/nizarmah" },
+      "featureList": [
+        "Deep cleaning of the print heads",
+        "Regular print head cleaning",
+        "Nozzle check pattern",
+        "Works through any CUPS queue or directly on /dev/usb/lp*",
+        "No dependencies beyond Python 3.8"
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to deep clean a Canon PIXMA printer from Linux",
+      "description": "Run a deep cleaning on a Canon PIXMA or MegaTank printer (such as the G3010) from Linux using canon-ij-maint.",
+      "totalTime": "PT15M",
+      "tool": [{ "@type": "HowToTool", "name": "Linux computer with CUPS and Python 3" }],
+      "step": [
+        { "@type": "HowToStep", "name": "Install", "text": "Run: pipx install git+https://github.com/nizarmah/canon-ij-maint" },
+        { "@type": "HowToStep", "name": "Find the printer", "text": "Run: canon-ij-maint list. It shows Canon CUPS queues and USB printer devices." },
+        { "@type": "HowToStep", "name": "Start the deep cleaning", "text": "Run: canon-ij-maint --queue YOUR_QUEUE clean --deep. The printer whirs for 2 to 3 minutes." },
+        { "@type": "HowToStep", "name": "Let the ink settle", "text": "Leave the printer alone for about 10 minutes after it goes quiet." },
+        { "@type": "HowToStep", "name": "Check the result", "text": "Run: canon-ij-maint --queue YOUR_QUEUE nozzle-check and look for gaps in each color." }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I deep clean a Canon PIXMA G3010 on Linux?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Canon's Linux driver only offers regular cleaning. Install canon-ij-maint and run 'canon-ij-maint --queue YOUR_QUEUE clean --deep'. Wait about 10 minutes after the printer stops, then print a nozzle check." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is one color (for example magenta) not printing on my Canon MegaTank even though the tank has ink?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Usually the nozzles for that color are clogged with dried ink, or there is air in its tube. Try a regular cleaning first, then a deep cleaning followed by a 10-minute rest. On a G3010 with magenta missing, two regular cleanings did nothing and one deep cleaning fixed it. If a deep cleaning repeated twice does not help, the print head may need replacing." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Canon's cnijfilter2 Linux driver support deep cleaning?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Its maintenance commands are limited to regular cleaning and a nozzle check. canon-ij-maint sends the same command format with the cleaning type set to deep." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to install Canon's driver to use canon-ij-maint?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. It needs only Python 3.8 or newer. It can send commands through any CUPS queue for the printer (including a Gutenprint one) or write directly to the USB printer device." }
+        },
+        {
+          "@type": "Question",
+          "name": "Which printers does canon-ij-maint work with?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It is tested on the Canon PIXMA G3010 over USB. Other recent PIXMA, MegaTank (G series), TS and TR models that use Canon's cnijfilter2 driver likely use the same protocol but are untested. Unsupported commands are simply ignored by the printer." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is deep cleaning bad for my printer?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It uses noticeably more ink than a regular cleaning and adds to the waste-ink absorber, so use it only when a regular cleaning has not helped, and not more than twice in a row." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg: #fbfaf8;
+  --surface: #ffffff;
+  --text: #1b1b1f;
+  --muted: #5b5b66;
+  --line: #e6e3de;
+  --accent: #c2185b;
+  --accent-soft: #fde7f0;
+  --code-bg: #17171c;
+  --code-text: #f2f2f5;
+  --cyan: #00a0d6;
+  --magenta: #d6006f;
+  --yellow: #f5c400;
+  --black: #222;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111115;
+    --surface: #18181e;
+    --text: #ececf1;
+    --muted: #a3a3b0;
+    --line: #2a2a33;
+    --accent: #ff4f9a;
+    --accent-soft: #3a1426;
+    --code-bg: #0b0b0e;
+    --code-text: #f2f2f5;
+    --black: #d6d6dc;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111115; --surface: #18181e; --text: #ececf1; --muted: #a3a3b0; --line: #2a2a33;
+  --accent: #ff4f9a; --accent-soft: #3a1426; --code-bg: #0b0b0e; --code-text: #f2f2f5; --black: #d6d6dc;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 17px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+a { color: var(--accent); }
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+header.top { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text); text-decoration: none; }
+.dots { display: inline-flex; }
+.dots i { width: 14px; height: 14px; border-radius: 50%; margin-left: -4px; mix-blend-mode: multiply; }
+@media (prefers-color-scheme: dark) { .dots i { mix-blend-mode: normal; } }
+.dots i:nth-child(1) { background: var(--cyan); margin-left: 0; }
+.dots i:nth-child(2) { background: var(--magenta); }
+.dots i:nth-child(3) { background: var(--yellow); }
+nav a { color: var(--muted); text-decoration: none; margin-left: 18px; font-size: 15px; }
+nav a:hover { color: var(--text); }
+
+.hero { padding: 48px 0 32px; }
+.eyebrow { display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--accent); background: var(--accent-soft); padding: 4px 10px; border-radius: 999px; }
+h1 { font-size: clamp(32px, 6vw, 52px); line-height: 1.08; letter-spacing: -0.02em; margin: 18px 0 16px; }
+.lede { font-size: 19px; color: var(--muted); max-width: 640px; margin: 0 0 28px; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-block; padding: 11px 18px; border-radius: 10px; font-weight: 600; text-decoration: none; font-size: 15px; }
+.btn.primary { background: var(--accent); color: #fff; }
+.btn.ghost { border: 1px solid var(--line); color: var(--text); background: var(--surface); }
+
+pre { position: relative; background: var(--code-bg); color: var(--code-text); border-radius: 12px;
+  padding: 16px 18px; overflow-x: auto; font: 14.5px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; margin: 0 0 14px; }
+pre .c { color: #8b8b99; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92em; }
+p code, li code, td code { background: var(--accent-soft); padding: 1px 5px; border-radius: 5px; }
+.copy { position: absolute; top: 10px; right: 10px; background: #2b2b33; color: #ddd; border: 0; border-radius: 7px;
+  font-size: 12px; padding: 5px 9px; cursor: pointer; }
+.copy:hover { background: #3a3a44; }
+
+section { padding: 36px 0; border-top: 1px solid var(--line); }
+h2 { font-size: 26px; letter-spacing: -0.01em; margin: 0 0 14px; }
+h3 { font-size: 18px; margin: 22px 0 6px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+.card h3 { margin-top: 0; }
+.card p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+.story { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 620px) { .story { grid-template-columns: 1fr; } }
+.swatches { display: flex; gap: 8px; margin: 10px 0 6px; }
+.sw { flex: 1; height: 44px; border-radius: 8px; border: 1px solid var(--line); }
+.sw-label { display: flex; gap: 8px; font-size: 12px; color: var(--muted); }
+.sw-label span { flex: 1; text-align: center; }
+
+table { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; }
+.ok { color: #1a8a4a; font-weight: 600; }
+@media (prefers-color-scheme: dark) { .ok { color: #52d18a; } }
+.no { color: var(--muted); }
+
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; }
+summary { cursor: pointer; font-weight: 600; }
+details p { margin: 10px 0 2px; color: var(--muted); }
+
+footer { border-top: 1px solid var(--line); padding: 28px 0 44px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>canon-ij-maint</a>
+    <nav><a href="#install">Install</a><a href="#faq">FAQ</a><a href="https://github.com/nizarmah/canon-ij-maint">GitHub</a></nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <span class="eyebrow">Free &amp; open source · Linux</span>
+      <h1>Deep clean your Canon PIXMA printer from Linux.</h1>
+      <p class="lede">One color stopped printing and the tank is full? Canon's Linux driver can't run a deep cleaning.
+        <strong>canon-ij-maint</strong> can, with one command and no Canon driver.</p>
+      <div class="cta">
+        <a class="btn primary" href="#install">Install in 10 seconds</a>
+        <a class="btn ghost" href="https://github.com/nizarmah/canon-ij-maint">View on GitHub</a>
+      </div>
+    </div>
+
+    <pre><code><span class="c"># deep clean the print heads</span>
+canon-ij-maint --queue Canon_G3010 clean --deep
+
+<span class="c"># wait ~10 minutes, then check every color</span>
+canon-ij-maint --queue Canon_G3010 nozzle-check</code></pre>
+
+    <section id="what">
+      <h2>What it does</h2>
+      <div class="grid">
+        <div class="card"><h3>Deep cleaning</h3><p>The stronger cleaning cycle that Canon's Linux driver doesn't offer. Clears stubborn clogs.</p></div>
+        <div class="card"><h3>Regular cleaning</h3><p>The everyday print head cleaning, for faint lines or light streaks.</p></div>
+        <div class="card"><h3>Nozzle check</h3><p>Prints Canon's test pattern so you can see which color has gaps.</p></div>
+        <div class="card"><h3>No driver needed</h3><p>One Python file, no dependencies. Works through any CUPS queue or straight to <code>/dev/usb/lp0</code>.</p></div>
+      </div>
+    </section>
+
+    <section id="story">
+      <h2>Why it exists</h2>
+      <p>Our Canon PIXMA G3010 stopped printing magenta. The tank was half full. Two regular cleanings from Linux changed nothing,
+        and the printer's buttons didn't start a deep cleaning. Canon's Linux driver only sends a regular cleaning, so we looked at
+        how it builds its commands. It's a small XML message with the cleaning type hard-coded to <code>regular</code>.
+        Setting it to <code>deep</code> worked: one deep cleaning and a 10-minute rest brought magenta back.</p>
+      <div class="story">
+        <div class="card">
+          <h3>Before</h3>
+          <div class="swatches">
+            <div class="sw" style="background:#49a6c6"></div><div class="sw" style="background:#dad9b6"></div>
+            <div class="sw" style="background:#e4c05d"></div><div class="sw" style="background:#d1c36f"></div>
+          </div>
+          <div class="sw-label"><span>cyan</span><span>magenta</span><span>yellow</span><span>red</span></div>
+          <p>Measured from a scan: "magenta" printed as almost bare paper, so red came out yellow.</p>
+        </div>
+        <div class="card">
+          <h3>After one deep clean</h3>
+          <div class="swatches">
+            <div class="sw" style="background:#4a88af"></div><div class="sw" style="background:#cb4d63"></div>
+            <div class="sw" style="background:#e4c05d"></div><div class="sw" style="background:#c95852"></div>
+          </div>
+          <div class="sw-label"><span>cyan</span><span>magenta</span><span>yellow</span><span>red</span></div>
+          <p>Same test page, same scanner: magenta and red are back.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="install">
+      <h2>Install</h2>
+      <p>With <a href="https://pipx.pypa.io/">pipx</a>:</p>
+      <pre><code>pipx install git+https://github.com/nizarmah/canon-ij-maint</code></pre>
+      <p>Or grab the single file. It only needs Python 3.8+:</p>
+      <pre><code>curl -fsSLO https://raw.githubusercontent.com/nizarmah/canon-ij-maint/main/canon_ij_maint.py
+python3 canon_ij_maint.py list</code></pre>
+    </section>
+
+    <section id="howto">
+      <h2>How to deep clean a Canon PIXMA printer on Linux</h2>
+      <h3>1. Find your printer</h3>
+      <pre><code>canon-ij-maint list</code></pre>
+      <p>This lists Canon printer queues in CUPS and any USB printer devices. If you have no queue yet, add the printer in your
+        system's printer settings (any driver is fine), or use <code>--device /dev/usb/lp0</code>.</p>
+      <h3>2. Start the deep cleaning</h3>
+      <pre><code>canon-ij-maint --queue YOUR_QUEUE clean --deep</code></pre>
+      <p>The printer should whir for 2–3 minutes. If it stays silent, it ignored the command.</p>
+      <h3>3. Let it rest, then check</h3>
+      <p>Wait about 10 minutes after it goes quiet so fresh ink soaks into the nozzles. Then print the pattern:</p>
+      <pre><code>canon-ij-maint --queue YOUR_QUEUE nozzle-check</code></pre>
+      <p>Still a gap in one color? Run one more deep cleaning. If two in a row don't help, the print head is probably worn out.</p>
+    </section>
+
+    <section id="printers">
+      <h2>Supported printers</h2>
+      <table>
+        <thead><tr><th>Printer</th><th>Regular clean</th><th>Deep clean</th><th>Nozzle check</th></tr></thead>
+        <tbody>
+          <tr><td>PIXMA G3010 (USB)</td><td class="ok">Works</td><td class="ok">Works</td><td class="ok">Works</td></tr>
+          <tr><td>Other PIXMA, MegaTank G-series, TS, TR models using Canon's <code>cnijfilter2</code> driver</td><td class="no">Likely, untested</td><td class="no">Likely, untested</td><td class="no">Likely, untested</td></tr>
+        </tbody>
+      </table>
+      <p>If your printer ignores a command, nothing happens and nothing breaks.
+        <a href="https://github.com/nizarmah/canon-ij-maint/issues">Tell us which model worked</a> so we can add it.</p>
+    </section>
+
+    <section id="faq">
+      <h2>FAQ</h2>
+      <details open>
+        <summary>How do I deep clean a Canon PIXMA G3010 on Linux?</summary>
+        <p>Canon's Linux driver only offers regular cleaning. Install canon-ij-maint and run
+          <code>canon-ij-maint --queue YOUR_QUEUE clean --deep</code>. Wait about 10 minutes after the printer stops, then print a nozzle check.</p>
+      </details>
+      <details>
+        <summary>One color (e.g. magenta) isn't printing but the tank has ink. Why?</summary>
+        <p>Usually that color's nozzles are clogged with dried ink, or there's air in its tube. Try a regular cleaning first, then a deep
+          cleaning followed by a 10-minute rest. On our G3010, two regular cleanings did nothing and one deep cleaning fixed it.</p>
+      </details>
+      <details>
+        <summary>Does Canon's cnijfilter2 Linux driver support deep cleaning?</summary>
+        <p>No. Its maintenance commands are limited to regular cleaning and a nozzle check. canon-ij-maint sends the same command format
+          with the cleaning type set to deep.</p>
+      </details>
+      <details>
+        <summary>Do I need Canon's driver installed?</summary>
+        <p>No. It needs only Python 3.8+. It sends commands through any CUPS queue for the printer, including a Gutenprint one,
+          or writes straight to the USB printer device.</p>
+      </details>
+      <details>
+        <summary>Can I deep clean just the color head?</summary>
+        <p>The tool accepts <code>--group color</code>, but the G3010 ignores a color-only deep cleaning. Use the default (<code>all</code>).</p>
+      </details>
+      <details>
+        <summary>Is deep cleaning bad for my printer?</summary>
+        <p>It uses more ink than a regular cleaning and fills the waste-ink absorber faster. Use it when a regular cleaning hasn't helped,
+          and not more than twice in a row.</p>
+      </details>
+      <details>
+        <summary>Paper ran out mid-print and nothing happens after I reload it.</summary>
+        <p>On the G3010 you have to confirm after loading paper: press the printer's Black or Color button to resume.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <p>canon-ij-maint is MIT-licensed. Made by <a href="https://github.com/nizarmah">Nizar</a>.
+      Not affiliated with or endorsed by Canon Inc. "Canon", "PIXMA" and "MegaTank" are trademarks of Canon Inc.</p>
+  </footer>
+</div>
+<script>
+document.querySelectorAll("pre").forEach(function (pre) {
+  var b = document.createElement("button");
+  b.className = "copy"; b.type = "button"; b.textContent = "Copy";
+  b.addEventListener("click", function () {
+    var text = pre.querySelector("code").innerText.split("\n").filter(function (l) { return !/^\s*#/.test(l); }).join("\n").trim();
+    try {
+      navigator.clipboard.writeText(text).then(function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1400); });
+    } catch (e) {}
+  });
+  pre.appendChild(b);
+});
+</script>
+</body>
+</html>

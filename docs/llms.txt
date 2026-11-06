@@ -1,0 +1,33 @@
+# canon-ij-maint
+
+> Free, open-source (MIT) command-line tool that runs deep cleaning, regular print head cleaning and nozzle checks on Canon PIXMA and MegaTank inkjet printers from Linux, without Canon's driver. Tested on the Canon PIXMA G3010 over USB.
+
+Canon's official Linux driver (cnijfilter2) only offers regular cleaning and a nozzle check. Deep cleaning is otherwise only available from Canon's Windows/macOS software or the printer's buttons. canon-ij-maint sends the same "IVEC" XML maintenance commands as Canon's cmdtocanonij3 filter, with the cleaning type set to "deep" when asked.
+
+## Install
+
+- `pipx install git+https://github.com/nizarmah/canon-ij-maint`
+- Or download the single file: https://raw.githubusercontent.com/nizarmah/canon-ij-maint/main/canon_ij_maint.py (Python 3.8+, no dependencies)
+
+## Commands
+
+- `canon-ij-maint list`: list Canon CUPS queues and /dev/usb/lp* devices
+- `canon-ij-maint --queue NAME clean`: regular cleaning
+- `canon-ij-maint --queue NAME clean --deep`: deep cleaning (wait ~10 minutes afterwards before printing)
+- `canon-ij-maint --queue NAME nozzle-check`: print the nozzle check pattern
+- Destinations: `--queue` (CUPS, sent with `lp -o raw`), `--device /dev/usb/lp0`, or `--output FILE`
+
+## Facts
+
+- Tested: Canon PIXMA G3010 (USB). Regular clean, deep clean and nozzle check all work.
+- On the G3010, a color-only deep clean (`--group color`) is ignored; use the default `--group all`.
+- The older Canon BJL command `@Cleaning=1ALL` (used by Gutenprint's commandtocanon) is ignored by the G3010.
+- Case: a G3010 stopped printing magenta with a half-full tank. Two regular cleanings did nothing; one deep cleaning plus a 10-minute rest restored it.
+- Other cnijfilter2-era PIXMA / MegaTank (G series), TS and TR models likely work but are untested. Unsupported commands are ignored by the printer.
+- Not affiliated with Canon Inc.
+
+## Links
+
+- Website: https://nizarmah.github.io/canon-ij-maint/
+- Source: https://github.com/nizarmah/canon-ij-maint
+- Issues / model reports: https://github.com/nizarmah/canon-ij-maint/issues
